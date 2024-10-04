@@ -4,6 +4,8 @@ extends CharacterBody2D
 var rotation_speed = 10.0
 var max_speed = 300.0
 var ship_velocity = Vector2.ZERO
+var recoil = 50.0
+var collision = 100.0
 
 #Animation variables
 @onready var left_thruster = $LeftThruster
@@ -25,6 +27,8 @@ var screen_size = Vector2.ZERO
 func _ready():
 	screen_size = get_viewport_rect().size
 
+
+
 func _process(delta):
 	if Input.is_action_pressed("fire"):
 		if !overheat:
@@ -32,6 +36,8 @@ func _process(delta):
 			fire_laser()
 			await get_tree().create_timer(0.15).timeout
 			overheat = false
+
+
 
 func _physics_process(delta):
 	#Controls for turning left
@@ -54,6 +60,14 @@ func _physics_process(delta):
 	#Changes the ship position
 	position += ship_velocity * delta
 	
+	
+	if Input.is_action_pressed("fire"):
+		if !overheat:
+			overheat = true
+			fire_laser()
+			await get_tree().create_timer(0.15).timeout
+			overheat = false
+
 #Function to display the thruster animations
 func show_thruster(thruster: Sprite2D):
 	thruster.visible = true
@@ -65,6 +79,8 @@ func show_thruster(thruster: Sprite2D):
 	elif thruster == right_thruster:
 		left_thruster.visible = false
 
+
+
 #Function to remove the thruster animation
 func hide_thrusters():
 	if frame_count > 0:
@@ -72,15 +88,23 @@ func hide_thrusters():
 	else:
 		left_thruster.visible = false
 		right_thruster.visible = false
-		
-		
+
+
+
+
 #Function to fire the laser from the ship
 func fire_laser():
+	var forward_direction = Vector2(0, -1).rotated(rotation)
+	var backward_force = forward_direction * -recoil
+	ship_velocity += backward_force
+	
 	var laser_instance = laser_scene.instantiate()
 	
 	laser_instance.global_position = muzzle.global_position
 	laser_instance.rotation = rotation
 	emit_signal("laser_shot", laser_instance)
+	
+
 
 
 func screen_wrap():
