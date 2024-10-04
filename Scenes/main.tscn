@@ -1,12 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck7udr1xihtcj"]
+[gd_scene load_steps=2 format=3 uid="uid://ck7udr1xihtcj"]
 
-[ext_resource type="PackedScene" uid="uid://buc07gxk40quu" path="res://Character/Player/player.tscn" id="1_btpfb"]
-[ext_resource type="PackedScene" uid="uid://dikanjq4qluk" path="res://Scenes/laser.tscn" id="2_srnls"]
+[ext_resource type="PackedScene" uid="uid://buc07gxk40quu" path="res://Scenes/player.tscn" id="1_btpfb"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_btpfb")]
-position = Vector2(632, 383)
-
-[node name="Laser" parent="." instance=ExtResource("2_srnls")]
-position = Vector2(704, 377)
+position = Vector2(1037, 521)
+rotation = -1.5708

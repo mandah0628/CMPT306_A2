@@ -1,57 +1,54 @@
 extends CharacterBody2D
 
+#movement variables
 var rotation_speed = 10.0
 var max_speed = 300.0
-var acceleration = 300.0
 var ship_velocity = Vector2.ZERO
-var deacceleration = 200
+
+#Animation variables
+@onready var left_thruster = $LeftThruster
+@onready var right_thruster = $RightThruster
+@onready var main_thruster = $MainThruster
+var max_frames = 3
+var frame_count = 0
 
 func _process(delta):
 	#Controls for turning left
-	if Input.is_action_pressed("strafe_left"):
+	if Input.is_action_pressed("move_left"):
 		rotation-=rotation_speed*delta
-	
+		show_thruster(left_thruster)
+		
 	#Controls for turning right
-	if Input.is_action_pressed("strafe_right"):
+	elif Input.is_action_pressed("move_right"):
 		rotation+=rotation_speed*delta
+		show_thruster(right_thruster)
 		
-	#Controls for moving forward
-	if Input.is_action_pressed("move_forward"):
-		var direction = Vector2(cos(rotation), sin(rotation))  
-		ship_velocity += direction * acceleration * delta
+	else:
+		hide_thrusters()
 		
-	#Controls for moving backward
-	if Input.is_action_pressed("move_backward"):
-		var direction = Vector2(cos(rotation), sin(rotation))
-		ship_velocity -= direction * acceleration * delta
-	
-	#Deaccelerates the ship if the movement keys are not pressed
-	if not Input.is_action_pressed("move_backward") and not Input.is_action_pressed("move_forward"):
-		var velocity_length = ship_velocity.length()
 		
-		#if ship is in motion, reduce speed(reduces the magnitue of the vector)
-		if velocity_length > 0:
-			velocity_length -= deacceleration * delta
-		
-		#if ship is not in motion
-		if velocity_length < 0:
-			velocity_length = 0
-		
-		#if ship is in motion, apply the new reduced speed
-		#by multuplying the new magnitued with the normal vector of the
-		#direction of where the ship is going
-		if velocity_length > 0:
-			ship_velocity = ship_velocity.normalized() * velocity_length
-			
-		#if not, comes to complete stop
-		else:
-			ship_velocity = Vector2.ZERO
-			
 	#Limits the max speed
 	if ship_velocity.length() > max_speed:
 		ship_velocity = ship_velocity.normalized() * max_speed
 		
 	#Changes the ship position
 	position += ship_velocity * delta
+	
+	
+func show_thruster(thruster: Sprite2D):
+	thruster.visible = true
+	frame_count = max_frames
+	
+	if thruster == left_thruster:
+		right_thruster.visible = false
 		
-		
+	elif thruster == right_thruster:
+		left_thruster.visible = false
+
+
+func hide_thrusters():
+	if frame_count > 0:
+		frame_count -= 1
+	else:
+		left_thruster.visible = false
+		right_thruster.visible = false

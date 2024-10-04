@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://buc07gxk40quu"]
+
+[ext_resource type="Texture2D" uid="uid://bjteh5fyc351t" path="res://Textures/Texture 2/PNG/playerShip1_red.png" id="1_22x2p"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_jq1ab"]
+[ext_resource type="Texture2D" uid="uid://s764kjf3ub6" path="res://Textures/Texture 2/PNG/Effects/fire09.png" id="3_oftih"]
+[ext_resource type="Texture2D" uid="uid://d84ewktunq7p" path="res://Textures/Texture 2/PNG/Effects/fire02.png" id="4_iwwk2"]
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_jq1ab")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, -2)
+scale = Vector2(0.85985, 0.899093)
+texture = ExtResource("1_22x2p")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0.454911, 3.38683)
+scale = Vector2(0.847011, 0.902535)
+polygon = PackedVector2Array(-38, -4, -14, -17, -11, -43, 6, -43, 10, -18, 33, -4, 38, -6, 41, -11, 44, -13, 48, -10, 45, 18, 42, 20, 39, 16, 33, 19, 12, 22, 6, 33, -10, 33, -16, 23, -43, 17, -47, 21, -49, 18, -52, -10, -48, -13)
+
+[node name="Muzzle" type="Node2D" parent="."]
+position = Vector2(-1, -42)
+
+[node name="Thruster" type="Sprite2D" parent="."]
+position = Vector2(-1, 52.5)
+scale = Vector2(1, 1.025)
+texture = ExtResource("3_oftih")
+
+[node name="LeftThruster" type="Sprite2D" parent="."]
+position = Vector2(-22, 39)
+texture = ExtResource("4_iwwk2")
+
+[node name="RightThruster" type="Sprite2D" parent="."]
+position = Vector2(21, 41)
+texture = ExtResource("4_iwwk2")
