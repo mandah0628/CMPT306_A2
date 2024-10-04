@@ -18,6 +18,13 @@ var laser_scene = preload("res://Scenes/laser.tscn")
 signal laser_shot(laser)
 var overheat = false
 
+#Camera variables
+var screen_size = Vector2.ZERO
+
+
+func _ready():
+	screen_size = get_viewport_rect().size
+
 func _process(delta):
 	if Input.is_action_pressed("fire"):
 		if !overheat:
@@ -75,4 +82,15 @@ func fire_laser():
 	laser_instance.rotation = rotation
 	emit_signal("laser_shot", laser_instance)
 
+
+func screen_wrap():
+	if position.x < 0:
+		position.x = screen_size.x
+	elif position.x > screen_size.x:
+		position.x = 0
 	
+	# Wrap vertically
+	if position.y < 0:
+		position.y = screen_size.y
+	elif position.y > screen_size.y:
+		position.y = 0
