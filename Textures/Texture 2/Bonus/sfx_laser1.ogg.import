@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b4ldavemi0xl1"
+path="res://.godot/imported/sfx_laser1.ogg-2246064f5eeeaefff37ea7bae1e35920.oggvorbisstr"
+
+[deps]
+
+source_file="res://Textures/Texture 2/Bonus/sfx_laser1.ogg"
+dest_files=["res://.godot/imported/sfx_laser1.ogg-2246064f5eeeaefff37ea7bae1e35920.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgb1bq0idixp7"
-path="res://.godot/imported/enemyNimble.png-5cd1acd2182d61cf1e23aaf833d65a91.ctex"
+path="res://.godot/imported/enemyNimble.png-ec548bec0204918c4e183d17bd379871.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Texture and sprites/Enemies/enemyNimble.png"
-dest_files=["res://.godot/imported/enemyNimble.png-5cd1acd2182d61cf1e23aaf833d65a91.ctex"]
+source_file="res://Textures/Texture 1/Enemies/enemyNimble.png"
+dest_files=["res://.godot/imported/enemyNimble.png-ec548bec0204918c4e183d17bd379871.ctex"]
 
 [params]
 
