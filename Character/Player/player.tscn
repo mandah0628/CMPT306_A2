@@ -1,7 +1,15 @@
-[gd_scene format=3 uid="uid://buc07gxk40quu"]
+[gd_scene load_steps=2 format=3 uid="uid://buc07gxk40quu"]
+
+[ext_resource type="Texture2D" uid="uid://bjteh5fyc351t" path="res://Textures/Texture 2/PNG/playerShip1_red.png" id="1_22x2p"]
 
 [node name="Player" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -5)
+rotation = 1.5708
+texture = ExtResource("1_22x2p")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-5, -2)
+rotation = 1.5708
+polygon = PackedVector2Array(-38, -4, -14, -17, -11, -43, 6, -43, 10, -18, 33, -4, 38, -6, 41, -11, 44, -13, 48, -10, 45, 18, 42, 20, 39, 16, 33, 19, 12, 22, 6, 33, -10, 33, -16, 23, -43, 17, -47, 21, -49, 18, -52, -10, -48, -13)
