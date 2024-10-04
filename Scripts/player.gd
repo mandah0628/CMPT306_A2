@@ -13,16 +13,15 @@ var max_frames = 3
 var frame_count = 0
 
 #Laser variables
-@onready var laser_scene = preload("res://Scenes/laser.tscn")
 @onready var muzzle = $Muzzle
-var laser_speed  = 500.0
-
+var laser_scene = preload("res://Scenes/laser.tscn")
+signal laser_shot(laser)
 
 func _process(delta):
-	#Controls for firing a laser
-	if Input.is_action_pressed("fire"):
+	if Input.is_action_just_pressed("fire"):
 		fire_laser()
-	
+
+func _physics_process(delta):
 	#Controls for turning left
 	if Input.is_action_pressed("move_left"):
 		rotation-=rotation_speed*delta
@@ -35,7 +34,6 @@ func _process(delta):
 		
 	else:
 		hide_thrusters()
-		
 		
 	#Limits the max speed
 	if ship_velocity.length() > max_speed:
@@ -66,13 +64,10 @@ func hide_thrusters():
 		
 #Function to fire the laser from the ship
 func fire_laser():
-	var laser = laser_scene.instance()
+	var laser_instance = laser_scene.instantiate()
+	
+	laser_instance.global_position = muzzle.global_position
+	laser_instance.rotation = rotation
+	emit_signal("laser_shot", laser_instance)
 
-	laser.position = muzzle.global_position
-	laser.rotation = rotation
 	
-	var direction = Vector2.RIGHT.rotated(rotation)  # RIGHT is the forward direction in Godot	
-	laser.set("velocity", direction * laser_speed)  # Assuming your laser script uses velocity for movement
-	
-	# Add the laser to the scene
-	get_parent().add_child(laser)

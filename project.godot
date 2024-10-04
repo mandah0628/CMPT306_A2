@@ -53,7 +53,7 @@ move_backward={
 2d_physics/layer_1="world"
 2d_physics/layer_2="player"
 2d_physics/layer_3="asteroid"
-2d_physics/layer_4="projectile"
+2d_physics/layer_4="laser"
 
 [rendering]
 
