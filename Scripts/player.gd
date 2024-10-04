@@ -16,10 +16,15 @@ var frame_count = 0
 @onready var muzzle = $Muzzle
 var laser_scene = preload("res://Scenes/laser.tscn")
 signal laser_shot(laser)
+var overheat = false
 
 func _process(delta):
-	if Input.is_action_just_pressed("fire"):
-		fire_laser()
+	if Input.is_action_pressed("fire"):
+		if !overheat:
+			overheat = true
+			fire_laser()
+			await get_tree().create_timer(0.15).timeout
+			overheat = false
 
 func _physics_process(delta):
 	#Controls for turning left
