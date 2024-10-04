@@ -12,7 +12,17 @@ var ship_velocity = Vector2.ZERO
 var max_frames = 3
 var frame_count = 0
 
+#Laser variables
+@onready var laser_scene = preload("res://Scenes/laser.tscn")
+@onready var muzzle = $Muzzle
+var laser_speed  = 500.0
+
+
 func _process(delta):
+	#Controls for firing a laser
+	if Input.is_action_pressed("fire"):
+		fire_laser()
+	
 	#Controls for turning left
 	if Input.is_action_pressed("move_left"):
 		rotation-=rotation_speed*delta
@@ -34,7 +44,7 @@ func _process(delta):
 	#Changes the ship position
 	position += ship_velocity * delta
 	
-	
+#Function to display the thruster animations
 func show_thruster(thruster: Sprite2D):
 	thruster.visible = true
 	frame_count = max_frames
@@ -45,10 +55,24 @@ func show_thruster(thruster: Sprite2D):
 	elif thruster == right_thruster:
 		left_thruster.visible = false
 
-
+#Function to remove the thruster animation
 func hide_thrusters():
 	if frame_count > 0:
 		frame_count -= 1
 	else:
 		left_thruster.visible = false
 		right_thruster.visible = false
+		
+		
+#Function to fire the laser from the ship
+func fire_laser():
+	var laser = laser_scene.instance()
+
+	laser.position = muzzle.global_position
+	laser.rotation = rotation
+	
+	var direction = Vector2.RIGHT.rotated(rotation)  # RIGHT is the forward direction in Godot	
+	laser.set("velocity", direction * laser_speed)  # Assuming your laser script uses velocity for movement
+	
+	# Add the laser to the scene
+	get_parent().add_child(laser)
