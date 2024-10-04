@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
 var rotation_speed = 10.0
-var max_speed = 500.0
+var max_speed = 300.0
 var acceleration = 300.0
 var ship_velocity = Vector2.ZERO
-var deacceleration = 100
+var deacceleration = 200
 
 func _process(delta):
 	#Controls for turning left
