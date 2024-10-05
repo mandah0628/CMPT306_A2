@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+
+
 #movement variables
 var rotation_speed = 10.0
 var max_speed = 300.0
@@ -11,17 +13,24 @@ var collision = 100.0
 @onready var left_thruster = $LeftThruster
 @onready var right_thruster = $RightThruster
 @onready var main_thruster = $MainThruster
+@onready var flash = $Flash
+@onready var muzzle = $Muzzle
+@onready var sprite = $Ship
+@onready var laser_sound = $Sound
+@onready var death_sound = $DeathSound
+@onready var life_loss_souind = $LifeLossSound
+
 var max_frames = 3
 var frame_count = 0
 
-#Laser variables
-@onready var muzzle = $Muzzle
 var laser_scene = preload("res://Scenes/laser.tscn")
 signal laser_shot(laser)
 var overheat = false
-@onready var flash = $Flash
 var flash_duration=0.15
-@onready var laser_sound = $Sound
+
+
+
+
 
 #Camera variables
 var screen_size = Vector2.ZERO
@@ -138,5 +147,16 @@ func die():
 	if alive == true:
 		alive = false
 		emit_signal("died")
-		queue_free()
-	
+		sprite.visible = false
+		main_thruster.visible =false
+		process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func respawn(pos):
+	if alive == false:
+		alive = true
+		global_position = pos
+		velocity = Vector2.ZERO
+		sprite.visible = true
+		main_thruster.visible = true
+		process_mode = Node.PROCESS_MODE_INHERIT

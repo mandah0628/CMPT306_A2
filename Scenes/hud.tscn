@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dopntscb8i1cv"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_ocujn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yeveb"]
+font_size = 48
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ocujn")
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 308.0
+offset_bottom = 67.0
+text = "Score: 9999"
+label_settings = SubResource("LabelSettings_yeveb")
+
+[node name="LiveContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.449
+offset_left = 11.0
+offset_top = 66.0
+offset_right = 219.0
+offset_bottom = 76.04
