@@ -46,3 +46,4 @@ texture = ExtResource("5_yuxc1")
 [node name="Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_3d5dk")
 volume_db = -6.559
+pitch_scale = 0.78
