@@ -19,6 +19,8 @@ var frame_count = 0
 var laser_scene = preload("res://Scenes/laser.tscn")
 signal laser_shot(laser)
 var overheat = false
+@onready var flash = $Flash
+var flash_duration=0.15
 
 #Camera variables
 var screen_size = Vector2.ZERO
@@ -26,7 +28,7 @@ var screen_size = Vector2.ZERO
 
 func _ready():
 	screen_size = get_viewport_rect().size
-
+	flash.visible = false
 
 
 func _process(delta):
@@ -97,6 +99,10 @@ func fire_laser():
 	var forward_direction = Vector2(0, -1).rotated(rotation)
 	var backward_force = forward_direction * -recoil
 	ship_velocity += backward_force
+	
+	flash.visible = true
+	await get_tree().create_timer(0.15).timeout
+	flash.visible = false
 	
 	var laser_instance = laser_scene.instantiate()
 	

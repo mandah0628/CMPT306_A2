@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://buc07gxk40quu"]
+[gd_scene load_steps=6 format=3 uid="uid://buc07gxk40quu"]
 
 [ext_resource type="Texture2D" uid="uid://bjteh5fyc351t" path="res://Textures/Texture 2/PNG/playerShip1_red.png" id="1_22x2p"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jq1ab"]
 [ext_resource type="Texture2D" uid="uid://s764kjf3ub6" path="res://Textures/Texture 2/PNG/Effects/fire09.png" id="3_oftih"]
 [ext_resource type="Texture2D" uid="uid://d84ewktunq7p" path="res://Textures/Texture 2/PNG/Effects/fire02.png" id="4_iwwk2"]
+[ext_resource type="Texture2D" uid="uid://c3ogaf67qfqt1" path="res://Textures/Texture 2/PNG/Lasers/laserRed10.png" id="5_yuxc1"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_jq1ab")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Ship" type="Sprite2D" parent="."]
 position = Vector2(-1, -2)
 scale = Vector2(0.85985, 0.899093)
 texture = ExtResource("1_22x2p")
@@ -35,3 +36,8 @@ texture = ExtResource("4_iwwk2")
 [node name="RightThruster" type="Sprite2D" parent="."]
 position = Vector2(21, 41)
 texture = ExtResource("4_iwwk2")
+
+[node name="Flash" type="Sprite2D" parent="."]
+position = Vector2(-1, -41.3718)
+scale = Vector2(0.378378, 0.312675)
+texture = ExtResource("5_yuxc1")
