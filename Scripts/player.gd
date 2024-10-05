@@ -31,7 +31,7 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	flash.visible = false
 
-
+#
 func _process(delta):
 	if Input.is_action_pressed("fire"):
 		if !overheat:
