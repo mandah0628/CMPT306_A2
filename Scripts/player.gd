@@ -21,6 +21,7 @@ signal laser_shot(laser)
 var overheat = false
 @onready var flash = $Flash
 var flash_duration=0.15
+@onready var laser_sound = $Sound
 
 #Camera variables
 var screen_size = Vector2.ZERO
@@ -99,6 +100,9 @@ func fire_laser():
 	var forward_direction = Vector2(0, -1).rotated(rotation)
 	var backward_force = forward_direction * -recoil
 	ship_velocity += backward_force
+	
+	laser_sound.play()
+	
 	
 	flash.visible = true
 	await get_tree().create_timer(0.15).timeout
