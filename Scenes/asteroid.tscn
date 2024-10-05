@@ -5,6 +5,8 @@
 [ext_resource type="Shape2D" uid="uid://dlo2gplc6fvj" path="res://Resources/asteroid_small.tres" id="3_q1np1"]
 
 [node name="Asteroid" type="Area2D"]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_pbua1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
