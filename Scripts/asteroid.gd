@@ -10,7 +10,7 @@ enum AsteroidSize{SMALL,MEDIUM,LARGE}
 @onready var collision_shape = $CollisionShape2D
 @onready var explosion_se = $Explosion
 
-signal exploded(pos,size)
+signal exploded(pos,size,points)
 
 func _ready():
 	rotation=randf_range(0, 2*PI)
@@ -29,8 +29,17 @@ func _ready():
 			sprite.texture = preload("res://Textures/Texture 2/PNG/Meteors/meteorBrown_small2.png")
 			collision_shape.set_deferred("shape", preload("res://Resources/asteroid_small.tres"))
 
-
-
+var points:int:
+	get:
+		match size:
+			AsteroidSize.LARGE:
+				return 100
+			AsteroidSize.MEDIUM:
+				return 150
+			AsteroidSize.SMALL:
+				return 250
+			_:
+				return 0
 
 func _physics_process(delta):
 	global_position +=movement_vector.rotated(rotation) * speed * delta
@@ -52,5 +61,12 @@ func _physics_process(delta):
 
 func explode():
 	explosion_se.play()
-	emit_signal("exploded", global_position, size)
+	emit_signal("exploded", global_position, size, points)
 	queue_free()
+
+
+func _on_body_entered(body):
+	if body is Player:
+		var player = body
+		player.die()
+	

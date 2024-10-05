@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 #movement variables
 var rotation_speed = 10.0
@@ -26,7 +26,8 @@ var flash_duration=0.15
 #Camera variables
 var screen_size = Vector2.ZERO
 
-
+signal died
+var alive = true
 func _ready():
 	flash.visible = false
 
@@ -131,3 +132,11 @@ func screen_wrap():
 		position.y = screen_size.y
 	elif position.y > screen_size.y:
 		position.y = 0
+		
+
+func die():
+	if alive == true:
+		alive = false
+		emit_signal("died")
+		queue_free()
+	

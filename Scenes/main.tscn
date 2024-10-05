@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://ck7udr1xihtcj"]
+[gd_scene load_steps=6 format=3 uid="uid://ck7udr1xihtcj"]
 
 [ext_resource type="PackedScene" uid="uid://buc07gxk40quu" path="res://Scenes/player.tscn" id="1_btpfb"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_t4nj7"]
 [ext_resource type="PackedScene" uid="uid://drfj05rflm4gb" path="res://Scenes/asteroid.tscn" id="3_dg2og"]
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="4_yc5wc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_yeveb"]
+font_size = 48
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_t4nj7")
@@ -28,3 +32,20 @@ position = Vector2(233, 221)
 
 [node name="Asteroid5" parent="Asteroids" instance=ExtResource("3_dg2og")]
 position = Vector2(1273, 425)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_yc5wc")
+
+[node name="Score" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 2.0
+offset_right = 265.0
+offset_bottom = 67.0
+text = "Score: 9999"
+label_settings = SubResource("LabelSettings_yeveb")
