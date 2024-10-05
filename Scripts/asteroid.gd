@@ -8,6 +8,7 @@ enum AsteroidSize{SMALL,MEDIUM,LARGE}
 
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
+@onready var explosion_se = $Explosion
 
 signal exploded(pos,size)
 
@@ -18,15 +19,15 @@ func _ready():
 		AsteroidSize.LARGE:
 			speed = randf_range(50,100)
 			sprite.texture = preload("res://Textures/Texture 2/PNG/Meteors/meteorBrown_big4.png")
-			collision_shape.shape = preload("res://Resources/asteroid_large.tres")
+			collision_shape.set_deferred("shape", preload("res://Resources/asteroid_large.tres"))
 		AsteroidSize.MEDIUM:
 			speed = randf_range(100,150)
 			sprite.texture = preload("res://Textures/Texture 2/PNG/Meteors/meteorBrown_med3.png")
-			collision_shape.shape = preload("res://Resources/asteroid_medium.tres")
+			collision_shape.set_deferred("shape", preload("res://Resources/asteroid_medium.tres"))
 		AsteroidSize.SMALL:
 			speed = randf_range(150, 200)
 			sprite.texture = preload("res://Textures/Texture 2/PNG/Meteors/meteorBrown_small2.png")
-			collision_shape.shape = preload("res://Resources/asteroid_small.tres")
+			collision_shape.set_deferred("shape", preload("res://Resources/asteroid_small.tres"))
 
 
 
@@ -50,5 +51,6 @@ func _physics_process(delta):
 
 
 func explode():
+	explosion_se.play()
 	emit_signal("exploded", global_position, size)
 	queue_free()

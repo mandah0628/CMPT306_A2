@@ -3,7 +3,7 @@ extends Node2D
 @onready var lasers = $Lasers
 @onready var player = $Player
 @onready var asteroids = $Asteroids
-
+@onready var explosion_se = $Asteroids/Asteroid/Explosion
 var asteroid_scene = preload("res://Scenes/asteroid.tscn")
 
 func _ready():
@@ -31,8 +31,9 @@ func _on_asteroid_exploded(pos,size):
 				pass
 
 func spawn_asteroid(pos,size):
+	explosion_se.play()
 	var asteroid_instance = asteroid_scene.instantiate()
 	asteroid_instance.global_position = pos
 	asteroid_instance.size = size
 	asteroid_instance.connect("exploded", _on_asteroid_exploded)
-	asteroids.add_child(asteroid_instance)
+	asteroids.call_deferred("add_child", asteroid_instance)
