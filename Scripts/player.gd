@@ -28,7 +28,6 @@ var screen_size = Vector2.ZERO
 
 
 func _ready():
-	screen_size = get_viewport_rect().size
 	flash.visible = false
 
 #
@@ -70,6 +69,9 @@ func _physics_process(delta):
 			fire_laser()
 			await get_tree().create_timer(0.15).timeout
 			overheat = false
+	screen_wrap()
+
+
 
 #Function to display the thruster animations
 func show_thruster(thruster: Sprite2D):
@@ -118,6 +120,7 @@ func fire_laser():
 
 
 func screen_wrap():
+	var screen_size = get_viewport_rect().size
 	if position.x < 0:
 		position.x = screen_size.x
 	elif position.x > screen_size.x:
